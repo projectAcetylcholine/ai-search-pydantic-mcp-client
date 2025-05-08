@@ -1,0 +1,7 @@
+pydantic
+pydantic-ai
+python-dotenv~=1.1.0
+mcp==1.6.0
+openai~=1.77.0
+rich~=14.0.0
+httpx~=0.28.1
