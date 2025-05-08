@@ -17,7 +17,7 @@ def setup_mcp_service(host_name: str, port: int):
     mcp = FastMCP("AI Search MCP Service", log_level="DEBUG", **settings)
 
     @mcp.tool(description="Reads the content of a local file and returns it as a string")
-    def read_file_content(file_path: str, encoding: str = "utf-8") -> str:
+    def fetch_local_file_contents_izzy(file_path: str, encoding: str = "utf-8") -> str:
         """
         Reads the content of a local file and returns it as a string.
 
@@ -39,7 +39,7 @@ def setup_mcp_service(host_name: str, port: int):
         return path.read_text(encoding=encoding)
 
     @mcp.tool(description="Fetches the contents of the given HTTP URL")
-    async def fetch_url_content_async(url: str) -> str:
+    async def fetch_url_contents_izzy(url: str) -> str:
         """
         Fetches the contents of the given HTTP URL
 

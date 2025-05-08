@@ -2,7 +2,9 @@ from typing import Sequence
 
 from openai import AsyncAzureOpenAI
 from pydantic_ai import Agent
+from pydantic_ai.agent import AgentRunResult
 from pydantic_ai.mcp import MCPServerHTTP, MCPServer
+from pydantic_ai.messages import ModelRequest, ModelResponse
 from pydantic_ai.models.openai import OpenAIModel
 from pydantic_ai.providers.openai import OpenAIProvider
 from rich.prompt import Prompt
@@ -45,12 +47,19 @@ print(global_message)
 async def main():
     async with agent.run_mcp_servers():
 
+        message_history: list[ModelRequest | ModelResponse] = []
+
         while True:
             # Prompt the user for input
             # and send it to the agent for processing
             # Use rich prompt for better user experience
             question = Prompt.ask(prompt)
-            result = await agent.run(question)
+            result: AgentRunResult = await agent.run(question, message_history=message_history)
+
+            latest_message_history:  list[ModelRequest | ModelResponse]  = result.all_messages()
+
+            message_history = latest_message_history
+
             print(result.output)
 
 if __name__ == '__main__':
