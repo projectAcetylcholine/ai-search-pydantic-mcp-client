@@ -1,5 +1,7 @@
+import os
 from typing import Sequence
 
+from dotenv import load_dotenv
 from openai import AsyncAzureOpenAI
 from pydantic_ai import Agent
 from pydantic_ai.agent import AgentRunResult
@@ -8,6 +10,14 @@ from pydantic_ai.messages import ModelRequest, ModelResponse
 from pydantic_ai.models.openai import OpenAIModel
 from pydantic_ai.providers.openai import OpenAIProvider
 from rich.prompt import Prompt
+
+mcp_env_file: str = '.env'
+
+if mcp_env_file and os.path.exists(mcp_env_file):
+    load_dotenv(dotenv_path=mcp_env_file)
+    print(f"Environment variables loaded from {mcp_env_file}")
+else:
+    print(f"Env file '{mcp_env_file}' not found. Skipping environment loading.")
 
 # Run the program as:
 # uv run main.py
