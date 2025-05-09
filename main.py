@@ -27,10 +27,7 @@ else:
 # Tools for Azure AI Search Operations
 ai_search_mcp_server = MCPServerHTTP(url='http://127.0.0.1:8000/sse')
 
-# Tools for fetching remote or local file contents
-helper_tools_mcp_server = MCPServerHTTP(url='http://127.0.0.1:3456/sse')
-
-my_mcp_servers: Sequence[MCPServer] = [ai_search_mcp_server, helper_tools_mcp_server]
+my_mcp_servers: Sequence[MCPServer] = [ai_search_mcp_server]
 
 # This is the OpenAI model name
 model_name = 'gpt-4o-mini'
